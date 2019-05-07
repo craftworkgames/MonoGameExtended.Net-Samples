@@ -1,5 +1,8 @@
 {
   "output": "../MonoGameOnAspNetCore/wwwroot/monogameonwebgl",
+  "html": {
+    "disabled": true
+  },
   "outputFormatting": "Minified",
   "usetypedarrays": true,
   "console": {
