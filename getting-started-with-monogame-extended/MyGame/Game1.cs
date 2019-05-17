@@ -1,15 +1,16 @@
 ﻿using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using MonoGame.Extended;
 
-namespace GettingStarted
+namespace MyGame
 {
-    public class GameMain : Game
+    public class Game1 : Game
     {
         private GraphicsDeviceManager _graphicsDeviceManager;
         private SpriteBatch _spriteBatch;
-        
-        public GameMain()
+
+        public Game1()
         {
             _graphicsDeviceManager = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -19,10 +20,6 @@ namespace GettingStarted
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
-        }
-
-        protected override void UnloadContent()
-        {
         }
 
         protected override void Update(GameTime gameTime)
@@ -40,6 +37,7 @@ namespace GettingStarted
             GraphicsDevice.Clear(Color.CornflowerBlue);
 
             _spriteBatch.Begin();
+            _spriteBatch.FillRectangle(100, 100, 200, 200, Color.Red);
             _spriteBatch.End();
 
             base.Draw(gameTime);
