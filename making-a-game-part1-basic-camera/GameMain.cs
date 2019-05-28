@@ -22,6 +22,7 @@ namespace ElthenBlade
         private OrthographicCamera _camera;
 
         private Texture2D _background;
+        private Texture2D _adventurer;
         private GameObject _player;
 
         public GameMain()
@@ -37,17 +38,15 @@ namespace ElthenBlade
         protected override void LoadContent()
         {
             _background = Content.Load<Texture2D>("background");
+            _adventurer = Content.Load<Texture2D>("adventurer");
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
-            _camera = new OrthographicCamera(GraphicsDevice)
-            {
-                Zoom = 2.0f
-            };
+            _camera = new OrthographicCamera(GraphicsDevice) { Zoom = 2.0f };
 
             _player = new GameObject
             {
-                Sprite = new Sprite(Content.Load<Texture2D>("adventurer")),
+                Sprite = new Sprite(_adventurer),
                 Position = new Vector2(120, 200),
                 Speed = 128
             };
@@ -80,16 +79,16 @@ namespace ElthenBlade
             if (keyboardState.IsKeyDown(Keys.Down) || keyboardState.IsKeyDown(Keys.S))
                 direction.Y += 1;
 
-            if (keyboardState.IsKeyDown(Keys.Q))
+            if (keyboardState.IsKeyDown(Keys.R))
+                _camera.ZoomIn(elapsedSeconds);
+
+            if (keyboardState.IsKeyDown(Keys.F))
                 _camera.ZoomOut(elapsedSeconds);
 
-            if (keyboardState.IsKeyDown(Keys.E))
-                _camera.ZoomIn(elapsedSeconds);
 
             _player.Position += direction * _player.Speed * elapsedSeconds;
 
             var lookAtPosition = Vector2.Lerp(_camera.Position + _camera.Origin, _player.Position, 0.05f);
-
             _camera.LookAt(lookAtPosition);
             
             base.Update(gameTime);
